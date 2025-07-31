@@ -14,7 +14,7 @@ def create_checkout_session(request):
             items = data['items']
             
             # Optional: print items to debug
-            print("Received items for Stripe:", items)
+            print(f"Received {len(items)} items for Stripe.")
 
             session = stripe.checkout.Session.create(
                 payment_method_types=['card'],
