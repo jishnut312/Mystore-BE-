@@ -25,13 +25,20 @@ SECRET_KEY = 'django-insecure-x+uao^3be))4d&+j!ep1))0by48z!rp7ikb8hfhgef28*r*2et
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'mystore-be-6.onrender.com', 
+    'localhost',
+    '127.0.0.1',
+]
 
 import os
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
+SECRET_KEY = os.environ.get(
+    'DJANGO_SECRET_KEY',
+    'django-insecure-x+uao^3be))4d&+j!ep1))0by48z!rp7ikb8hfhgef28*r*2et'
+)
 # Application definition
 
 INSTALLED_APPS = [
@@ -149,4 +156,3 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
