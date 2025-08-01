@@ -1,5 +1,6 @@
 import json
 import stripe
+import traceback
 from django.conf import settings
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -11,19 +12,22 @@ def create_checkout_session(request):
     if request.method == 'POST':
         try:
             data = json.loads(request.body)
-            items = data['items']
+            items = data.get('items', [])
             
-            # Optional: print items to debug
-            print(f"Received {len(items)} items for Stripe.")
+            if not isinstance(items, list) or not items:
+                return JsonResponse({'error': 'Invalid or empty items list'}, status=400)
+
+            print(f"Stripe checkout attempt with {len(items)} item(s)")
 
             session = stripe.checkout.Session.create(
                 payment_method_types=['card'],
                 line_items=items,
                 mode='payment',
-                success_url='http://localhost:3000/success',
-                cancel_url='http://localhost:3000/cancel',
+                success_url='https://your-frontend/success',
+                cancel_url='https://your-frontend/cancel',
             )
             return JsonResponse({'id': session.id})
         except Exception as e:
             print("Stripe error:", e)
+            traceback.print_exc()
             return JsonResponse({'error': str(e)}, status=400)
