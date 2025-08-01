@@ -26,10 +26,11 @@ SECRET_KEY = 'django-insecure-x+uao^3be))4d&+j!ep1))0by48z!rp7ikb8hfhgef28*r*2et
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'mystore-be-6.onrender.com', 
+    'mystore-be.onrender.com',
     'localhost',
     '127.0.0.1',
 ]
+
 
 import os
 
