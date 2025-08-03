@@ -27,9 +27,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'mystore-be.onrender.com',
+    'mystore-be-5.onrender.com',   # <-- Add this line
     'localhost',
     '127.0.0.1',
 ]
+
 
 
 import os
